@@ -33,23 +33,20 @@ photos = [
     "fight_club_3.jpg",
 ]
 
-
 # Генератор случайных правил Бойцовского клуба
 def generate_random_rule():
     rule_number = random.randint(1, 10)
-    return f"Правило Бойцовского клуба №{rule_number}: {random.choice(['Не рассказывать о Бойцовском клубе.', 'Драться до конца.', 'Никаких рубашек, никаких обуви.'])}"
 
+    return f"Правило Бойцовского клуба №{rule_number}: {random.choice(['Не рассказывать о Бойцовском клубе.', 'Драться до конца.', 'Никаких рубашек, никаких обуви.'])}"
 
 # Маршруты API
 @app.get("/quote", summary="Получить случайную цитату из фильма")
 def get_random_quote():
     return JSONResponse(content={"quote": random.choice(quotes)})
 
-
 @app.get("/fact", summary="Получить интересный факт о фильме")
 def get_random_fact():
     return JSONResponse(content={"fact": random.choice(facts)})
-
 
 @app.get("/photo", summary="Получить случайную фотографию из фильма")
 def get_random_photo():
@@ -58,11 +55,9 @@ def get_random_photo():
         raise HTTPException(status_code=404, detail="Фотография не найдена")
     return FileResponse(photo)
 
-
 @app.get("/rule", summary="Получить случайное правило Бойцовского клуба")
 def get_random_rule():
     return JSONResponse(content={"rule": generate_random_rule()})
-
 
 @app.get("/everything", summary="Получить всё: цитату, факт, фото и правило")
 def get_everything():
@@ -72,7 +67,6 @@ def get_everything():
         "photo": random.choice(photos),
         "rule": generate_random_rule(),
     })
-
 
 # Запуск сервера
 if __name__ == "__main__":
